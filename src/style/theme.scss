@@ -1,0 +1,310 @@
+// custom Bootstrap 4 theming
+
+// COLORS
+
+$white: #fff;
+$black: #000;
+
+$gray-050: #e5e6e8;
+$gray-100: #cccdd2;
+$gray-200: #b4b4bb;
+$gray-300: #999aa4;
+$gray-400: #80818d;
+$gray-500: #666877;
+$gray-600: #52535f;
+$gray-700: #3d3e47;
+$gray-800: #292a30;
+$gray-900: #141518;
+
+$blue-050: #dae8f4;
+$blue-100: #bfccf5;
+$blue-200: #97adf1;
+$blue-300: #7693ec;
+$blue-400: #587be7;
+$blue-500: #4366d3;
+$blue-600: #2f52b9;
+$blue-700: #1c3688;
+$blue-800: #0c205a;
+$blue-900: #010b2d;
+
+$red-050: #f6dce2;
+$red-100: #ecb8c5;
+$red-200: #e38ea3;
+$red-300: #da6a84;
+$red-400: #cb4666;
+$red-500: #c13958;
+$red-600: #a42443;
+$red-700: #770d26;
+$red-800: #500416;
+$red-900: #290505;
+
+$yellow-050: #f5e3d7;
+$yellow-100: #ebc6b0;
+$yellow-200: #d9ae7c;
+$yellow-300: #cc9352;
+$yellow-400: #c07b2c;
+$yellow-500: #a76417;
+$yellow-600: #94550e;
+$yellow-700: #6b3a01;
+$yellow-800: #482600;
+$yellow-900: #241400;
+
+$green-050: #dbe9dd;
+$green-100: #b7d3bc;
+$green-200: #8cbe95;
+$green-300: #61a86c;
+$green-400: #3d924b;
+$green-500: #2f783b;
+$green-600: #1b6a29;
+$green-700: #0c4a16;
+$green-800: #04320c;
+$green-900: #001905;
+
+$grays: ();
+$grays: map-merge(
+   (
+      "100": $gray-100,
+      "200": $gray-200,
+      "300": $gray-300,
+      "400": $gray-400,
+      "500": $gray-500,
+      "600": $gray-600,
+      "700": $gray-700,
+      "800": $gray-800,
+      "900": $gray-900,
+   ),
+   $grays
+);
+
+$blue: $blue-500;
+$red: $red-500;
+$gray: $gray-600;
+$yellow: $yellow-500;
+$green: $green-500;
+
+$colors: ();
+$colors: map-merge(
+   (
+      "blue": $blue,
+      "red": $red,
+      "white": $white,
+      "gray": $gray,
+      "gray-dark": $gray-800,
+      "green": $green,
+      "yellow": $yellow,
+   ),
+   $colors
+);
+
+$primary: $gray-800;
+$secondary: $gray-700;
+$info: $white;
+$success: $blue;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+$high: $green-500;
+$medium: $yellow-400;
+$low: $red-400;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+   (
+      "primary": $primary,
+      "secondary": $secondary,
+      "info": $white,
+      "success": $success,
+      "danger": $danger,
+      "light": $light,
+      "dark": $dark,
+      "high": $high,
+      "medium": $medium,
+      "low": $low,
+   ),
+   $theme-colors
+);
+
+$component-active-bg: theme-color("primary") !default;
+
+// SPACING
+
+// $spacer is used for font sizes, thus rem is preferred
+// $spacers are used for paddings and margins and px are preferred
+
+$spacer: 1rem; // 16px in most browsers
+$spacers: ();
+$spacers: map-merge(
+   (
+      0: 0px,
+      1: 4px,
+      2: 8px,
+      3: 12px,
+      4: 16px,
+      5: 24px,
+      6: 32px,
+      7: 48px,
+      8: 64px,
+      9: 96px,
+      10: 128px,
+      11: 160px,
+      12: 192px,
+   ),
+   $spacers
+);
+
+$paragraph-margin-bottom: 0;
+
+// FONTS
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+$font-family-sans-serif: "Roboto", sans-serif, "Apple Color Emoji",
+   "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-serif: serif;
+
+$font-family-base: $font-family-sans-serif;
+
+$enable-responsive-font-sizes: true;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$line-height-base: 1.5;
+
+$font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.25; // 30px
+$font-size-sm: 20px; // 18px
+
+$small-font-size: 21px;
+
+// $h1-font-size: $font-size-base * 1.25; // 60px - site name
+// $h2-font-size: 4rem;
+// $h3-font-size: $font-size-base * 1.5;
+// $h4-font-size: $font-size-base * 1.25;
+
+// $headings-margin-bottom: $spacer / 2;
+// $headings-font-family: $font-family-sans-serif;
+// $headings-font-weight: 400;
+// $headings-line-height: 1;
+
+// $display1-size: 7rem;
+// $display2-size: 3.5rem;
+// $display3-size: 3rem;
+// $display4-size: 2.5rem;
+
+// $display1-weight: 400;
+// $display2-weight: 400;
+// $display3-weight: 400;
+// $display4-weight: 400;
+
+// $display-line-height: $headings-line-height;
+
+$text-muted: $gray-600;
+
+$lead-font-size: $font-size-base * 1.5;
+$lead-font-weight: $font-weight-normal;
+
+// // LINKS
+
+// $link-color: theme-color("primary");
+// $link-decoration: none;
+// $link-hover-color: darken($link-color, 15%);
+// $link-hover-decoration: none;
+// // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+// $emphasized-link-hover-darken-percentage: 15%;
+
+// // BUTTONS AND INPUTS
+
+// $input-btn-padding-y: map-get($spacers, 2);
+// $input-btn-padding-x: map-get($spacers, 4);
+// $input-btn-font-size: $font-size-base;
+// $input-btn-line-height: $line-height-base;
+
+// $input-btn-padding-y-sm: map-get($spacers, 1);
+// $input-btn-padding-x-sm: map-get($spacers, 4);
+// $input-btn-font-size-sm: $font-size-sm;
+// $input-btn-line-height-sm: $line-height-base;
+
+// $input-btn-padding-y-lg: map-get($spacers, 2);
+// $input-btn-padding-x-lg: map-get($spacers, 7);
+// $input-btn-font-size-lg: $font-size-base;
+// $input-btn-line-height-lg: $line-height-base;
+
+// $input-btn-focus-width: 0.2rem;
+// $input-btn-focus-color: rgba($component-active-bg, 0.25);
+// $input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
+
+// $input-placeholder-color: $text-muted;
+
+// // BUTTONS
+
+// $btn-font-weight: $font-weight-normal;
+// $input-btn-font-family: $font-family-sans-serif;
+
+// $btn-padding-y: $input-btn-padding-y;
+// $btn-padding-x: $input-btn-padding-x;
+// $btn-font-size: $font-size-base;
+// $btn-line-height: $line-height-base;
+
+// $btn-padding-y-sm: $input-btn-padding-y-sm;
+// $btn-padding-x-sm: $input-btn-padding-x-sm;
+// $btn-font-size-sm: $font-size-sm;
+// $btn-line-height-sm: $line-height-base;
+
+// $btn-padding-y-lg: $input-btn-padding-y-lg;
+// $btn-padding-x-lg: $input-btn-padding-x-lg;
+// $btn-font-size-lg: $font-size-base;
+// $btn-line-height-lg: $line-height-base;
+
+// // INPUTS
+
+// $input-padding-y: $input-btn-padding-y;
+// $input-padding-x: $input-btn-padding-x;
+// $input-font-size: $font-size-base;
+// $input-line-height: $line-height-base;
+
+// $input-padding-y-sm: $input-btn-padding-y-sm;
+// $input-padding-x-sm: $input-btn-padding-x-sm;
+// $input-font-size-sm: $font-size-sm;
+// $input-line-height-sm: $line-height-base;
+
+// $input-padding-y-lg: $input-btn-padding-y-lg;
+// $input-padding-x-lg: $input-btn-padding-x-lg;
+// $input-font-size-lg: $font-size-base;
+// $input-line-height-lg: $line-height-base;
+
+// $text-height: 24px;
+
+// $input-height: add(
+//    $text-height,
+//    add($input-padding-y * 2, $border-width * 2),
+//    false
+// );
+// $input-height-sm: add(
+//    $text-height,
+//    add($input-padding-y-sm * 2, $border-width * 2, false)
+// );
+// $input-height-lg: add(
+//    $text-height,
+//    add($input-padding-y-lg * 2, $border-width * 2, false)
+// );
+
+// $input-bg: $white;
+// $input-disabled-bg: $gray-200;
+// $input-color: $gray-700;
+// $input-border-color: $gray-300;
+
+// $input-focus-bg: $input-bg;
+// $input-focus-border-color: lighten($component-active-bg, 25%);
+// $input-focus-color: $input-color;
+// $input-focus-width: $input-btn-focus-width;
+// $input-focus-box-shadow: $input-btn-focus-box-shadow;
+
+// // NAVBAR
+
+// $navbar-light-color: $blue-600;
+// $navbar-light-hover-color: $blue-700;
+// $navbar-light-active-color: $blue-800;
+// $navbar-light-disabled-color: $gray-300;

@@ -1,0 +1,13 @@
+// Required functions, variables, and mixins for theming
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+// Our design team's custom theme
+@import "theme.scss";
+
+// All of Bootstrap TODO: only use the components we need
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Our custom overrides
+@import "style.scss";
