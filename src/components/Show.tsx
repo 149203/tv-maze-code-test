@@ -1,59 +1,66 @@
 import "../style/master.scss";
-import logo from "../icons/top-tv-logo.svg";
+import Header from "./Header";
 import ShowTitle from "./ShowTitle";
 import CtaButton from "./CtaButton";
+import Score from "./Score";
+import Season from "./Season";
 import { useEffect, useState } from "react";
-import { iShow } from "../models/clientInterfaces";
+import { showType, seasonType } from "../models/clientInterfaces";
 import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
+import getSeasons from "../utils/getSeasons";
 
 function Show() {
-   const initialShow: iShow = {
+   // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
+   // Do I have to do all this up front?
+
+   const initialShow: showType = {
       name: "",
       genres: [],
       premieredAt: "",
       image: { medium: "" },
       summary: "",
       url: "",
+      rating: {
+         average: null,
+      },
+      _embedded: {
+         episodes: [],
+      },
    };
 
-   const [show, setShow] = useState<iShow | void>(initialShow);
+   const initialSeasons: ReadonlyArray<seasonType> = [
+      {
+         number: 0,
+         episodes: [],
+         airedAt: "",
+      },
+   ];
 
+   const [show, setShow] = useState<showType | void>(initialShow);
+   const [seasons, setSeasons] = useState(initialSeasons);
    useEffect(() => {
-      getShow("http://api.tvmaze.com/shows/101?embed=episodes").then(
-         (res: iShow | void) => {
-            console.log(res);
-            setShow(res);
+      getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
+         if (show) {
+            console.log(show);
+            const seasonsFromEpisodes = getSeasons(show._embedded.episodes);
+            setShow(show);
+            setSeasons(seasonsFromEpisodes);
          }
-      );
+      });
    }, []);
 
    return (
       <>
+         <Header />
          {show && (
             <div>
-               <header className="w-100 bg-primary text-white pt-2 pb-1 mb-6">
-                  <div className="container">
-                     <div className="row">
-                        <div className="col-12 col-xl-10 offset-xl-1">
-                           <img
-                              src={logo}
-                              width="40px"
-                              alt="Episode Switcher logo"
-                           />
-                           <p className="d-inline ml-4 text-white text-decoration-none lead">
-                              Episode Switcher
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </header>
                <main className="container">
                   <div className="row">
                      <div className="col-12 col-xl-10 offset-xl-1">
                         <article className="row">
                            <div className="col-12 d-md-none">
-                              <ShowTitle show={show as iShow} />
+                              <ShowTitle show={show} />
                            </div>
                            <div className="col-4 col-sm-3">
                               <img
@@ -63,10 +70,12 @@ function Show() {
                               />
 
                               <div className="float-right mt-3 d-md-none">
-                                 {/* <Score
-                     size="sm"
-                     rating={Math.round(rating.average * 10)}
-                  /> */}
+                                 <Score
+                                    size="sm"
+                                    rating={Math.round(
+                                       (show.rating.average as number) * 10
+                                    )}
+                                 />
                               </div>
                               <div className="clearfix" />
                               <CtaButton url={show.url} xPadding={0} />
@@ -74,13 +83,15 @@ function Show() {
                            <div className="col-8 col-sm-9">
                               <div className="row">
                                  <div className="col-12 col-md-10 d-none d-md-block">
-                                    <ShowTitle show={show as iShow} />
+                                    <ShowTitle show={show} />
                                  </div>
                                  <div className="d-none d-md-block col-md-2">
-                                    {/* <Score
-                        size="md"
-                        rating={Math.round(rating.average * 10)}
-                     /> */}
+                                    <Score
+                                       size="md"
+                                       rating={Math.round(
+                                          (show.rating.average as number) * 10
+                                       )}
+                                    />
                                  </div>
                               </div>
                               <p className="mt-md-5 d-md-none">
@@ -99,9 +110,11 @@ function Show() {
                /> */}
                            </div>
 
-                           {/* {this.state.displayedSeasons.map((season) => {
-               return <Season season={season} key={season.number} />;
-            })} */}
+                           {seasons.map((season) => {
+                              return (
+                                 <Season season={season} key={season.number} />
+                              );
+                           })}
                         </article>
                      </div>
                   </div>

@@ -1,9 +1,9 @@
-interface Props {
+interface propsType {
    url: string;
    xPadding: number;
 }
 
-export default function CtaButton(props: Props) {
+export default function CtaButton(props: propsType) {
    const { url, xPadding } = props;
 
    function getButtonClasses(xPadding: number): string {

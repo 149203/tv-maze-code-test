@@ -179,15 +179,10 @@ $font-size-sm: 20px; // 18px
 
 $small-font-size: 21px;
 
-// $h1-font-size: $font-size-base * 1.25; // 60px - site name
-// $h2-font-size: 4rem;
-// $h3-font-size: $font-size-base * 1.5;
-// $h4-font-size: $font-size-base * 1.25;
-
-// $headings-margin-bottom: $spacer / 2;
-// $headings-font-family: $font-family-sans-serif;
-// $headings-font-weight: 400;
-// $headings-line-height: 1;
+$headings-margin-bottom: $spacer / 2;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 400;
+$headings-line-height: 1;
 
 // $display1-size: 7rem;
 // $display2-size: 3.5rem;
@@ -206,57 +201,57 @@ $text-muted: $gray-600;
 $lead-font-size: $font-size-base * 1.5;
 $lead-font-weight: $font-weight-normal;
 
-// // LINKS
+// LINKS
 
-// $link-color: theme-color("primary");
-// $link-decoration: none;
-// $link-hover-color: darken($link-color, 15%);
-// $link-hover-decoration: none;
-// // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
-// $emphasized-link-hover-darken-percentage: 15%;
+$link-color: theme-color("primary");
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: none;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+$emphasized-link-hover-darken-percentage: 15%;
 
-// // BUTTONS AND INPUTS
+// BUTTONS AND INPUTS
 
-// $input-btn-padding-y: map-get($spacers, 2);
-// $input-btn-padding-x: map-get($spacers, 4);
-// $input-btn-font-size: $font-size-base;
-// $input-btn-line-height: $line-height-base;
+$input-btn-padding-y: map-get($spacers, 2);
+$input-btn-padding-x: map-get($spacers, 4);
+$input-btn-font-size: $font-size-base;
+$input-btn-line-height: $line-height-base;
 
-// $input-btn-padding-y-sm: map-get($spacers, 1);
-// $input-btn-padding-x-sm: map-get($spacers, 4);
-// $input-btn-font-size-sm: $font-size-sm;
-// $input-btn-line-height-sm: $line-height-base;
+$input-btn-padding-y-sm: map-get($spacers, 1);
+$input-btn-padding-x-sm: map-get($spacers, 4);
+$input-btn-font-size-sm: $font-size-sm;
+$input-btn-line-height-sm: $line-height-base;
 
-// $input-btn-padding-y-lg: map-get($spacers, 2);
-// $input-btn-padding-x-lg: map-get($spacers, 7);
-// $input-btn-font-size-lg: $font-size-base;
-// $input-btn-line-height-lg: $line-height-base;
+$input-btn-padding-y-lg: map-get($spacers, 2);
+$input-btn-padding-x-lg: map-get($spacers, 7);
+$input-btn-font-size-lg: $font-size-base;
+$input-btn-line-height-lg: $line-height-base;
 
-// $input-btn-focus-width: 0.2rem;
-// $input-btn-focus-color: rgba($component-active-bg, 0.25);
-// $input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
+$input-btn-focus-width: 0.2rem;
+$input-btn-focus-color: rgba($component-active-bg, 0.25);
+$input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
 
-// $input-placeholder-color: $text-muted;
+$input-placeholder-color: $text-muted;
 
-// // BUTTONS
+// BUTTONS
 
-// $btn-font-weight: $font-weight-normal;
-// $input-btn-font-family: $font-family-sans-serif;
+$btn-font-weight: $font-weight-normal;
+$input-btn-font-family: $font-family-sans-serif;
 
-// $btn-padding-y: $input-btn-padding-y;
-// $btn-padding-x: $input-btn-padding-x;
-// $btn-font-size: $font-size-base;
-// $btn-line-height: $line-height-base;
+$btn-padding-y: $input-btn-padding-y;
+$btn-padding-x: $input-btn-padding-x;
+$btn-font-size: $font-size-base;
+$btn-line-height: $line-height-base;
 
-// $btn-padding-y-sm: $input-btn-padding-y-sm;
-// $btn-padding-x-sm: $input-btn-padding-x-sm;
-// $btn-font-size-sm: $font-size-sm;
-// $btn-line-height-sm: $line-height-base;
+$btn-padding-y-sm: $input-btn-padding-y-sm;
+$btn-padding-x-sm: $input-btn-padding-x-sm;
+$btn-font-size-sm: $font-size-sm;
+$btn-line-height-sm: $line-height-base;
 
-// $btn-padding-y-lg: $input-btn-padding-y-lg;
-// $btn-padding-x-lg: $input-btn-padding-x-lg;
-// $btn-font-size-lg: $font-size-base;
-// $btn-line-height-lg: $line-height-base;
+$btn-padding-y-lg: $input-btn-padding-y-lg;
+$btn-padding-x-lg: $input-btn-padding-x-lg;
+$btn-font-size-lg: $font-size-base;
+$btn-line-height-lg: $line-height-base;
 
 // // INPUTS
 

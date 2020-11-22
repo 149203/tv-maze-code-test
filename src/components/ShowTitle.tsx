@@ -1,12 +1,12 @@
 // import { toListText, toShowDate } from "../utils/helpers";
 import { toListText, toShowDate } from "../utils/helpers";
-import { iShow } from "../models/clientInterfaces";
+import { showType } from "../models/clientInterfaces";
 
-interface Props {
-   show: iShow;
+interface propsType {
+   show: showType;
 }
 
-export default function ShowTitle(props: Props) {
+export default function ShowTitle(props: propsType) {
    return (
       <section>
          <h1>{props.show.name}</h1>
