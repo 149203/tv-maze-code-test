@@ -1,17 +1,19 @@
 // import { toListText, toShowDate } from "../utils/helpers";
-import React from "react";
+import { toListText, toShowDate } from "../utils/helpers";
+import { iShow } from "../models/clientInterfaces";
 
 interface Props {
-   name: string;
+   show: iShow;
 }
 
-export const ShowTitle: React.FC<Props> = ({ name }) => {
+export default function ShowTitle(props: Props) {
    return (
       <section>
-         <h1>{name}</h1>
+         <h1>{props.show.name}</h1>
          <p className="text-muted mb-3">
-            {/* {toListText(genres)} | Premiered on {toShowDate(premiered)} */}
+            {toListText(props.show.genres)} | Premiered on{" "}
+            {toShowDate(props.show.premieredAt)}
          </p>
       </section>
    );
-};
+}
