@@ -11,9 +11,10 @@ interface propsType {
 
 export default function Search(props: propsType) {
    const [searchInput, setSearchInput] = useState("");
+   const { seasons, setDisplayedSeasons } = props;
 
    useEffect(() => {
-      const newSeasons = produce(props.seasons, (draftSeasons) => {
+      const newSeasons = produce(seasons, (draftSeasons) => {
          draftSeasons.forEach((season) => {
             let episodes: episodeType[] = [];
             season.episodes.forEach((episode) => {
@@ -34,8 +35,8 @@ export default function Search(props: propsType) {
          });
       }).filter((season) => season.episodes.length > 0);
 
-      props.setDisplayedSeasons(newSeasons);
-   }, [searchInput, props]);
+      setDisplayedSeasons(newSeasons);
+   }, [searchInput, seasons, setDisplayedSeasons]);
 
    return (
       <>
