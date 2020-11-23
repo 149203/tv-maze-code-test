@@ -148,7 +148,8 @@ export default function Show() {
                               </label>
                               <input
                                  className="form-control ml-4"
-                                 // placeholder={props.placeholder}
+                                 placeholder="Search for an episode" // ADD IN COMPONENT
+                                 autoComplete="off" // ADD IN COMPONENT
                                  id="search"
                                  onChange={(e) => {
                                     setSearchInput(e.target.value);
