@@ -10,7 +10,7 @@ import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
 import searchIcon from "../icons/search.svg";
-import cloneDeep from "lodash/cloneDeep"; // TODO: REPLACE WITH IMMER
+import produce from "immer";
 
 export default function Show() {
    // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
@@ -57,26 +57,27 @@ export default function Show() {
    }, []);
 
    useEffect(() => {
-      let newSeasons: readonly seasonType[] = [];
-      const copyOfSeasons = cloneDeep(seasons); // TODO: REPLACE WITH IMMER
-      copyOfSeasons.forEach((season) => {
-         let episodes: readonly episodeType[] = [];
-         season.episodes.forEach((episode) => {
-            const lowerCasedInput = searchInput.toLowerCase();
-            if (episode.name && episode.summary) {
+      const newSeasons = produce(seasons, (draftSeasons) => {
+         draftSeasons.forEach((season) => {
+            let episodes: episodeType[] = [];
+            season.episodes.forEach((episode) => {
+               const lowerCasedInput = searchInput.toLowerCase();
                if (
-                  episode.name.toLowerCase().includes(lowerCasedInput) ||
-                  episode.summary.toLowerCase().includes(lowerCasedInput)
+                  (episode.name &&
+                     episode.name.toLowerCase().includes(lowerCasedInput)) ||
+                  (episode.summary &&
+                     episode.summary.toLowerCase().includes(lowerCasedInput))
                ) {
                   episodes = episodes.concat(episode);
                }
+            });
+            season.episodes = episodes;
+            if (episodes.length > 0) {
+               draftSeasons = draftSeasons.concat(season);
             }
          });
-         season.episodes = episodes;
-         if (episodes.length > 0) {
-            newSeasons = newSeasons.concat(season);
-         }
-      });
+      }).filter((season) => season.episodes.length > 0);
+
       setDisplayedSeasons(newSeasons);
    }, [searchInput, seasons]);
 
