@@ -5,14 +5,17 @@ import CtaButton from "./CtaButton";
 import Score from "./Score";
 import Season from "./Season";
 import { useEffect, useState } from "react";
-import { showType, seasonType } from "../models/clientInterfaces";
+import { showType, seasonType, episodeType } from "../models/clientInterfaces";
 import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
+import searchIcon from "../icons/search.svg";
+import cloneDeep from "lodash/cloneDeep";
 
-function Show() {
+export default function Show() {
    // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
    // Do I have to do all this up front?
+   // What should I do about the FOUC?
 
    const initialShow: showType = {
       name: "",
@@ -37,18 +40,44 @@ function Show() {
       },
    ];
 
-   const [show, setShow] = useState<showType | void>(initialShow);
+   const [show, setShow] = useState<showType>(initialShow);
    const [seasons, setSeasons] = useState(initialSeasons);
+   const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
+   const [searchInput, setSearchInput] = useState("");
    useEffect(() => {
       getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
          if (show) {
-            console.log(show);
             const seasonsFromEpisodes = getSeasons(show._embedded.episodes);
             setShow(show);
             setSeasons(seasonsFromEpisodes);
+            setDisplayedSeasons(seasonsFromEpisodes);
          }
       });
    }, []);
+
+   useEffect(() => {
+      let newSeasons: ReadonlyArray<seasonType> = [];
+      const copyOfSeasons = cloneDeep(seasons);
+      copyOfSeasons.forEach((season) => {
+         let episodes: ReadonlyArray<episodeType> = [];
+         season.episodes.forEach((episode) => {
+            const lowerCasedInput = searchInput.toLowerCase();
+            if (episode.name && episode.summary) {
+               if (
+                  episode.name.toLowerCase().includes(lowerCasedInput) ||
+                  episode.summary.toLowerCase().includes(lowerCasedInput)
+               ) {
+                  episodes = episodes.concat(episode);
+               }
+            }
+         });
+         season.episodes = episodes;
+         if (episodes.length > 0) {
+            newSeasons = newSeasons.concat(season);
+         }
+      });
+      setDisplayedSeasons(newSeasons);
+   }, [searchInput, seasons]);
 
    return (
       <>
@@ -108,9 +137,25 @@ function Show() {
                   placeholder="Search for an episode"
                   onChange={this.searchEpisodes}
                /> */}
+                              <label htmlFor="search">
+                                 <img
+                                    src={searchIcon}
+                                    width="28px"
+                                    style={{ marginTop: "6px" }}
+                                    alt="search"
+                                 />
+                              </label>
+                              <input
+                                 className="form-control ml-4"
+                                 // placeholder={props.placeholder}
+                                 id="search"
+                                 onChange={(e) => {
+                                    setSearchInput(e.target.value);
+                                 }}
+                              />
                            </div>
 
-                           {seasons.map((season) => {
+                           {displayedSeasons.map((season) => {
                               return (
                                  <Season season={season} key={season.number} />
                               );
@@ -124,5 +169,3 @@ function Show() {
       </>
    );
 }
-
-export default Show;
