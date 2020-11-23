@@ -32,7 +32,7 @@ export default function Show() {
       },
    };
 
-   const initialSeasons: ReadonlyArray<seasonType> = [
+   const initialSeasons: readonly seasonType[] = [
       {
          number: 0,
          episodes: [],
@@ -56,10 +56,10 @@ export default function Show() {
    }, []);
 
    useEffect(() => {
-      let newSeasons: ReadonlyArray<seasonType> = [];
+      let newSeasons: readonly seasonType[] = [];
       const copyOfSeasons = cloneDeep(seasons);
       copyOfSeasons.forEach((season) => {
-         let episodes: ReadonlyArray<episodeType> = [];
+         let episodes: readonly episodeType[] = [];
          season.episodes.forEach((episode) => {
             const lowerCasedInput = searchInput.toLowerCase();
             if (episode.name && episode.summary) {

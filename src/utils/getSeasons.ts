@@ -1,10 +1,10 @@
 import { seasonType, episodeType } from "../models/clientInterfaces";
 
-export default function getSeasons(episodes: ReadonlyArray<episodeType>) {
-   let seasons: ReadonlyArray<seasonType> = [];
+export default function getSeasons(episodes: readonly episodeType[]) {
+   let seasons: readonly seasonType[] = [];
    episodes.forEach((episode: episodeType) => {
       // get list of season numbers
-      const seasonNumbers: ReadonlyArray<number> = seasons.map(
+      const seasonNumbers: readonly number[] = seasons.map(
          (season: seasonType) => {
             return season.number;
          }

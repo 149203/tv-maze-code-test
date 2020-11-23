@@ -1,7 +1,7 @@
 import formatDate from "date-fns/format";
 
 export function toListText(
-   words: ReadonlyArray<string>,
+   words: readonly string[],
    conjunction?: string
 ): string {
    // returns a string of words combined in a natural-language style

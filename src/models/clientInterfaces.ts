@@ -11,13 +11,13 @@ export interface episodeType {
 
 export interface seasonType {
    number: number;
-   episodes: ReadonlyArray<episodeType>;
+   episodes: readonly episodeType[];
    airedAt: string;
 }
 
 export interface showType {
    name: string;
-   genres: ReadonlyArray<string>; // For mutable arrays: Array<string> or string[]
+   genres: readonly string[]; // For mutable arrays: Array<string> or string[]
    premieredAt: string;
    image: {
       medium: string;
@@ -28,6 +28,6 @@ export interface showType {
       average: number | null;
    };
    _embedded: {
-      episodes: ReadonlyArray<episodeType>;
+      episodes: readonly episodeType[];
    };
 }
