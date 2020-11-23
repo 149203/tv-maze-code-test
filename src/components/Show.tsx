@@ -10,7 +10,7 @@ import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
 import searchIcon from "../icons/search.svg";
-import cloneDeep from "lodash/cloneDeep";
+import cloneDeep from "lodash/cloneDeep"; // TODO: REPLACE WITH IMMER
 
 export default function Show() {
    // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
@@ -58,7 +58,7 @@ export default function Show() {
 
    useEffect(() => {
       let newSeasons: readonly seasonType[] = [];
-      const copyOfSeasons = cloneDeep(seasons);
+      const copyOfSeasons = cloneDeep(seasons); // TODO: REPLACE WITH IMMER
       copyOfSeasons.forEach((season) => {
          let episodes: readonly episodeType[] = [];
          season.episodes.forEach((episode) => {
