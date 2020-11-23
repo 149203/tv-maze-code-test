@@ -4,13 +4,12 @@ import ShowTitle from "./ShowTitle";
 import CtaButton from "./CtaButton";
 import Score from "./Score";
 import Season from "./Season";
+import Search from "./Search";
 import { useEffect, useState } from "react";
-import { showType, seasonType, episodeType } from "../models/clientInterfaces";
+import { showType, seasonType } from "../models/clientInterfaces";
 import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
-import searchIcon from "../icons/search.svg";
-import produce from "immer";
 
 export default function Show() {
    // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
@@ -44,7 +43,6 @@ export default function Show() {
    const [show, setShow] = useState<showType>(initialShow);
    const [seasons, setSeasons] = useState(initialSeasons);
    const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
-   const [searchInput, setSearchInput] = useState("");
    useEffect(() => {
       getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
          if (show) {
@@ -55,31 +53,6 @@ export default function Show() {
          }
       });
    }, []);
-
-   useEffect(() => {
-      const newSeasons = produce(seasons, (draftSeasons) => {
-         draftSeasons.forEach((season) => {
-            let episodes: episodeType[] = [];
-            season.episodes.forEach((episode) => {
-               const lowerCasedInput = searchInput.toLowerCase();
-               if (
-                  (episode.name &&
-                     episode.name.toLowerCase().includes(lowerCasedInput)) ||
-                  (episode.summary &&
-                     episode.summary.toLowerCase().includes(lowerCasedInput))
-               ) {
-                  episodes = episodes.concat(episode);
-               }
-            });
-            season.episodes = episodes;
-            if (episodes.length > 0) {
-               draftSeasons = draftSeasons.concat(season);
-            }
-         });
-      }).filter((season) => season.episodes.length > 0);
-
-      setDisplayedSeasons(newSeasons);
-   }, [searchInput, seasons]);
 
    return (
       <>
@@ -135,26 +108,10 @@ export default function Show() {
                            </div>
 
                            <div className="col-12 col-md-5 offset-md-7 col-lg-4 offset-lg-8 mt-7 mb-5 mb-md-0 d-flex">
-                              {/* <Search
-                  placeholder="Search for an episode"
-                  onChange={this.searchEpisodes}
-               /> */}
-                              <label htmlFor="search">
-                                 <img
-                                    src={searchIcon}
-                                    width="28px"
-                                    style={{ marginTop: "6px" }}
-                                    alt="search"
-                                 />
-                              </label>
-                              <input
-                                 className="form-control ml-4"
-                                 placeholder="Search for an episode" // ADD IN COMPONENT
-                                 autoComplete="off" // ADD IN COMPONENT
-                                 id="search"
-                                 onChange={(e) => {
-                                    setSearchInput(e.target.value);
-                                 }}
+                              <Search
+                                 placeholder="Search for an episode"
+                                 seasons={seasons}
+                                 setDisplayedSeasons={setDisplayedSeasons}
                               />
                            </div>
 
