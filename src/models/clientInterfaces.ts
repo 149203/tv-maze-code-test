@@ -17,7 +17,7 @@ export interface seasonType {
 
 export interface showType {
    name: string;
-   genres: readonly string[]; // For mutable arrays: Array<string> or string[]
+   genres: readonly string[]; // For mutable arrays: string[]
    premieredAt: string;
    image: {
       medium: string;
@@ -30,4 +30,5 @@ export interface showType {
    _embedded: {
       episodes: readonly episodeType[];
    };
+   premiered: string;
 }

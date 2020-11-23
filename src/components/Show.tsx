@@ -21,6 +21,7 @@ export default function Show() {
       name: "",
       genres: [],
       premieredAt: "",
+      premiered: "",
       image: { medium: "" },
       summary: "",
       url: "",
