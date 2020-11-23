@@ -12,10 +12,6 @@ import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
 
 export default function Show() {
-   // QUESTION: why don't I just set the initial state to null? It comes back in the shape of showType.
-   // Do I have to do all this up front?
-   // What should I do about the FOUC?
-
    const initialShow: showType = {
       name: "",
       genres: [],
@@ -43,6 +39,7 @@ export default function Show() {
    const [show, setShow] = useState<showType>(initialShow);
    const [seasons, setSeasons] = useState(initialSeasons);
    const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
+   const [hasDataLoaded, setHasDataLoaded] = useState(false);
    useEffect(() => {
       getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
          if (show) {
@@ -50,6 +47,7 @@ export default function Show() {
             setShow(show);
             setSeasons(seasonsFromEpisodes);
             setDisplayedSeasons(seasonsFromEpisodes);
+            setHasDataLoaded(true);
          }
       });
    }, []);
@@ -57,7 +55,7 @@ export default function Show() {
    return (
       <>
          <Header />
-         {show && (
+         {hasDataLoaded && (
             <div>
                <main className="container">
                   <div className="row">
