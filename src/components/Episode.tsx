@@ -9,7 +9,7 @@ interface propsType {
 
 export default function Episode(props: propsType) {
    return (
-      <section className="row mb-7">
+      <section className="row mb-5">
          <div className="col-12 d-md-none">
             <EpisodeTitle episode={props.episode} />
          </div>

@@ -20,7 +20,7 @@ export default function Screenshot(props: propsType) {
    } else {
       return (
          <div
-            className="bg-light w-100 position-relative"
+            className="bg-secondary w-100 position-relative"
             style={{
                paddingTop: "56.25%",
             }}

@@ -18,5 +18,26 @@ a:hover {
    height: 0;
    padding-top: 55%;
    position: relative;
-   background-color: $gray-050;
+   background-color: $gray-200;
+}
+
+#search::placeholder {
+   color: $gray-200;
+}
+
+#search {
+   border-color: $gray-100;
+   z-index: 1050;
+}
+
+#search-wrapper {
+   position: absolute;
+   top: 2px;
+   right: 0;
+   margin-right: 15px;
+}
+
+input.form-control,
+input.form-inline {
+   width: 200px !important;
 }
