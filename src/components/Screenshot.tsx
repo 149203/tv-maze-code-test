@@ -25,8 +25,8 @@ export default function Screenshot(props: propsType) {
                paddingTop: "56.25%",
             }}
          >
-            <p
-               className="text-white lead"
+            <h2
+               className="text-white"
                style={{
                   position: "absolute",
                   left: 0,
@@ -37,7 +37,7 @@ export default function Screenshot(props: propsType) {
                }}
             >
                NA
-            </p>
+            </h2>
          </div>
       );
    }

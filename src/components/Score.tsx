@@ -6,15 +6,15 @@ interface propsType {
 export default function Score(props: propsType) {
    if (props.size === "md") {
       return (
-         <span className="py-3 px-4 text-white rounded float-right bg-success lead">
-            {props.rating}
+         <span className="p-4 text-white rounded float-right bg-success">
+            <h4 className="mb-0">{props.rating}</h4>
          </span>
       );
    }
    if (props.size === "sm") {
       return (
          <span
-            className="py-1 px-2 text-white rounded bg-success"
+            className="p-2 text-white rounded bg-success"
             style={{ fontSize: "16px" }}
          >
             {props.rating}

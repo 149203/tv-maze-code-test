@@ -39,14 +39,14 @@ export default function Search(props: propsType) {
    }, [searchInput, seasons, setDisplayedSeasons]);
 
    return (
-      <div className="d-flex bg-primary pl-4" id="search-wrapper">
-         <label htmlFor="search">
+      <div className="d-flex bg-dark pl-4" id="search-wrapper">
+         {/* <label htmlFor="search">
             <SearchIcon
                fill="#cccdd2"
                width="28px"
                style={{ marginTop: "6px" }}
             />
-         </label>
+         </label> */}
          {/* <input
             className="form-control ml-4 bg-transparent text-white"
             placeholder={props.placeholder}
@@ -64,7 +64,13 @@ export default function Search(props: propsType) {
                autoComplete="off"
             />
             <div className="input-group-append">
-               <button className="btn btn-success">Go</button>
+               <button className="btn btn-secondary">
+                  <SearchIcon
+                     fill="#ffffff"
+                     width="17px"
+                     style={{ marginTop: "1px" }}
+                  />
+               </button>
             </div>
          </div>
       </div>
