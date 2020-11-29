@@ -16,7 +16,7 @@ export default function Season(props: propsType) {
             {props.season.airedAt &&
                " | Aired " + toShowDate(props.season.airedAt)}
          </p>
-         <hr className="mt-2 mb-5" />
+         <hr className="mt-2 mb-4" />
          {props.season.episodes.map((episode) => {
             return <Episode episode={episode} key={episode.id} />;
          })}

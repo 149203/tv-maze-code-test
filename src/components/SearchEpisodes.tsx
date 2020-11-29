@@ -37,19 +37,22 @@ export default function SearchEpisodes(props: propsType) {
    }, [searchInput, seasons, setDisplayedSeasons]);
 
    return (
-      <div className="col-12 mt-5 mb-4">
-         <div className="d-flex">
-            <form className="form-inline">
-               <div className="form-group">
-                  <label htmlFor="search-episodes">Find an episode:</label>
-                  <input
-                     className="form-control ml-4"
-                     id="search-episodes"
-                     autoComplete="off"
-                     onChange={(e) => setSearchInput(e.target.value)}
-                  />
-               </div>
-            </form>
+      <div className="col-12 mt-5 mb-3">
+         <div className="row">
+            <div className="col-lg-1 col-md-2 col-sm-2">
+               <label htmlFor="search-episodes" className="mt-2">
+                  Filter
+               </label>
+            </div>
+
+            <div className="col-lg-4 col-md-5 col-sm-10">
+               <input
+                  className="form-control"
+                  id="search-episodes"
+                  autoComplete="off"
+                  onChange={(e) => setSearchInput(e.target.value)}
+               />
+            </div>
          </div>
       </div>
    );
