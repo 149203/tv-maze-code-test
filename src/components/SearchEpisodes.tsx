@@ -1,4 +1,3 @@
-import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import { seasonType, episodeType } from "../models/clientInterfaces";
 import { useEffect, useState } from "react";
 import produce from "immer";
@@ -8,7 +7,7 @@ interface propsType {
    setDisplayedSeasons: any;
 }
 
-export default function Search(props: propsType) {
+export default function SearchEpisodes(props: propsType) {
    const [searchInput, setSearchInput] = useState("");
    const { seasons, setDisplayedSeasons } = props;
 
@@ -38,40 +37,19 @@ export default function Search(props: propsType) {
    }, [searchInput, seasons, setDisplayedSeasons]);
 
    return (
-      <div className="d-flex bg-dark pl-3" id="search-wrapper">
-         {/* <label htmlFor="search">
-            <SearchIcon
-               fill="#cccdd2"
-               width="28px"
-               style={{ marginTop: "6px" }}
-            />
-         </label> */}
-         {/* <input
-            className="form-control ml-4 bg-transparent text-white"
-            placeholder={props.placeholder}
-            id="search"
-            autoComplete="off"
-            onChange={(e) => {
-               setSearchInput(e.target.value);
-            }}
-         /> */}
-         <div className="input-group">
-            <SearchIcon
-               fill="#e9ecef"
-               width="24px"
-               style={{ marginTop: "3px" }}
-               className="mr-3"
-            />
-
-            <input
-               type="text"
-               className="form-control form-control rounded-left"
-               placeholder="Enter a TV show"
-               autoComplete="off"
-            />
-            <div className="input-group-append">
-               <button className="btn btn-secondary">Search</button>
-            </div>
+      <div className="col-12 mt-5 mb-4">
+         <div className="d-flex">
+            <form className="form-inline">
+               <div className="form-group">
+                  <label htmlFor="search-episodes">Find an episode:</label>
+                  <input
+                     className="form-control ml-4"
+                     id="search-episodes"
+                     autoComplete="off"
+                     onChange={(e) => setSearchInput(e.target.value)}
+                  />
+               </div>
+            </form>
          </div>
       </div>
    );
