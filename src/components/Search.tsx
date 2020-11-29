@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import produce from "immer";
 
 interface propsType {
-   placeholder: string;
    seasons: readonly seasonType[];
    setDisplayedSeasons: any;
 }
@@ -39,7 +38,7 @@ export default function Search(props: propsType) {
    }, [searchInput, seasons, setDisplayedSeasons]);
 
    return (
-      <div className="d-flex bg-dark pl-4" id="search-wrapper">
+      <div className="d-flex bg-dark pl-3" id="search-wrapper">
          {/* <label htmlFor="search">
             <SearchIcon
                fill="#cccdd2"
@@ -57,20 +56,21 @@ export default function Search(props: propsType) {
             }}
          /> */}
          <div className="input-group">
+            <SearchIcon
+               fill="#e9ecef"
+               width="24px"
+               style={{ marginTop: "3px" }}
+               className="mr-3"
+            />
+
             <input
                type="text"
-               className="form-control form-control"
-               placeholder="Search for a show"
+               className="form-control form-control rounded-left"
+               placeholder="Enter a TV show"
                autoComplete="off"
             />
             <div className="input-group-append">
-               <button className="btn btn-secondary">
-                  <SearchIcon
-                     fill="#ffffff"
-                     width="17px"
-                     style={{ marginTop: "1px" }}
-                  />
-               </button>
+               <button className="btn btn-secondary">Search</button>
             </div>
          </div>
       </div>

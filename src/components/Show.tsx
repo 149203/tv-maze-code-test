@@ -56,7 +56,7 @@ export default function Show() {
 
    return (
       <>
-         <header className="w-100 bg-dark text-white pt-2 pb-1 mb-4">
+         <header className="w-100 bg-dark text-white pt-2 pb-1 mb-5">
             <div className="container">
                <div className="row">
                   <div className="col-12 col-xl-10 offset-xl-1">
@@ -66,7 +66,6 @@ export default function Show() {
                      </h4>
 
                      <Search
-                        placeholder="Search for a show"
                         seasons={seasons}
                         setDisplayedSeasons={setDisplayedSeasons}
                      />
@@ -161,7 +160,7 @@ export default function Show() {
                                        autoComplete="off"
                                        id="show-input"
                                     />
-                                    <button className="btn btn-dark ml-4">
+                                    <button className="btn btn-dark ml-4 px-4">
                                        Replace
                                     </button>
                                  </div>
