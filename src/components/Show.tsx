@@ -43,7 +43,10 @@ export default function Show() {
    const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
    const [hasDataLoaded, setHasDataLoaded] = useState(false);
    useEffect(() => {
-      getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
+      // 101 = The Good Wife (85)
+      // 507 = Angels in America (77)
+      // 261 = The Soup (45)
+      getShow("http://api.tvmaze.com/shows/261?embed=episodes").then((show) => {
          if (show) {
             const seasonsFromEpisodes = getSeasons(show._embedded.episodes);
             setShow(show);
