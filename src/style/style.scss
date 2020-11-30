@@ -17,3 +17,22 @@ html {
    right: 0;
    margin-right: 15px;
 }
+
+#show-input-group {
+   @include media-breakpoint-down(sm) {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+   }
+}
+
+#show-search-icon {
+   cursor: pointer;
+   margin-top: 4px;
+   @include media-breakpoint-down(sm) {
+      fill: $white;
+      position: absolute;
+      top: 0;
+      right: 0;
+   }
+}

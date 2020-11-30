@@ -6,15 +6,15 @@ interface propsType {}
 
 export default function SearchShows(props: propsType) {
    return (
-      <div className="d-flex bg-dark pl-3" id="search-wrapper">
-         <div className="input-group">
-            <SearchIcon
-               fill="#e9ecef"
-               width="24px"
-               style={{ marginTop: "3px" }}
-               className="mr-3"
-            />
+      <div className="d-flex pl-3" id="search-wrapper">
+         <SearchIcon
+            fill="#dee2e6"
+            width="28px"
+            className=""
+            id="show-search-icon"
+         />
 
+         <div className="input-group ml-3" id="show-input-group">
             <input
                type="text"
                className="form-control form-control rounded-left"
