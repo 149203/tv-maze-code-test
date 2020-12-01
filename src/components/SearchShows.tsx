@@ -24,7 +24,7 @@ export default function SearchShows(props: propsType) {
             console.log(inputGroup);
             inputGroup.style.maxWidth = "100%";
             inputGroup.style.opacity = "1";
-            inputGroup.style.transition = "max-width 0.2s, opacity 0.5s";
+            inputGroup.style.transition = "max-width 0.8s, opacity 0.2s";
          }
          if (logoWrapper) {
             logoWrapper.style.opacity = "0";
