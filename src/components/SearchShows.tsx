@@ -1,28 +1,67 @@
 import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import { useEffect, useState } from "react";
 import produce from "immer";
+import logo from "../icons/top-tv-logo.svg";
 
 interface propsType {}
 
 export default function SearchShows(props: propsType) {
-   return (
-      <div className="d-flex pl-3" id="search-wrapper">
-         <SearchIcon
-            fill="#dee2e6"
-            width="28px"
-            className=""
-            id="show-search-icon"
-         />
+   const initialIsOpen = false;
+   const [isOpen, setIsOpen] = useState(initialIsOpen);
+   useEffect(() => {
+      console.log(isOpen);
+      if (isOpen) {
+         const inputGroup = document.querySelector<HTMLElement>(
+            "#show-input-group"
+         );
+         const logoWrapper = document.querySelector<HTMLElement>(
+            "#logo-wrapper"
+         );
+         const searchIcon = document.querySelector<HTMLElement>(
+            "#show-search-icon"
+         );
+         if (inputGroup) {
+            console.log(inputGroup);
+            inputGroup.style.maxWidth = "100%";
+            inputGroup.style.opacity = "1";
+            inputGroup.style.transition = "max-width 0.2s, opacity 0.5s";
+         }
+         if (logoWrapper) {
+            logoWrapper.style.opacity = "0";
+            logoWrapper.style.maxWidth = "0%";
+            logoWrapper.style.transition = "max-width 0.2s, opacity 0.5s";
+         }
+         if (searchIcon) {
+            searchIcon.style.marginRight = "0";
+         }
+      }
+   }, [isOpen]);
 
-         <div className="input-group ml-3" id="show-input-group">
-            <input
-               type="text"
-               className="form-control form-control rounded-left"
-               placeholder="Enter a TV show"
-               autoComplete="off"
+   return (
+      <div className="col-12 col-xl-10 offset-xl-1 mb-2">
+         <div className="position-absolute" id="logo-wrapper">
+            <img src={logo} width="40px" alt="Episode Switcher logo" />
+            <h4 className="d-inline ml-4 text-white">Episode Switcher</h4>
+         </div>
+         <div className="d-inline-flex mt-1 float-right" id="search-wrapper">
+            <SearchIcon
+               fill="#dee2e6"
+               width="28px"
+               className="mt-1"
+               id="show-search-icon"
+               onClick={() => setIsOpen(!isOpen)}
             />
-            <div className="input-group-append">
-               <button className="btn btn-secondary">Search</button>
+
+            <div className="input-group ml-3" id="show-input-group">
+               <input
+                  type="text"
+                  className="form-control form-control rounded-left"
+                  placeholder="Enter a TV show"
+                  autoComplete="off"
+               />
+               <div className="input-group-append">
+                  <button className="btn btn-secondary">Search</button>
+               </div>
             </div>
          </div>
       </div>

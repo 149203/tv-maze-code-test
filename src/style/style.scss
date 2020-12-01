@@ -12,27 +12,23 @@ html {
 }
 
 #search-wrapper {
-   position: absolute;
-   top: 2px;
-   right: 0;
-   margin-right: 15px;
+   // margin-right: 15px;
 }
 
 #show-input-group {
+   float: right;
    @include media-breakpoint-down(sm) {
       max-width: 0;
+      height: 0;
       opacity: 0;
-      overflow: hidden;
    }
 }
 
 #show-search-icon {
    cursor: pointer;
-   margin-top: 4px;
+
    @include media-breakpoint-down(sm) {
       fill: $white;
-      position: absolute;
-      top: 0;
-      right: 0;
+      margin-right: -15px;
    }
 }

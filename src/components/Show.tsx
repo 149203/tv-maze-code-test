@@ -1,5 +1,4 @@
 import "../style/master.scss";
-import logo from "../icons/top-tv-logo.svg";
 import ShowTitle from "./ShowTitle";
 // import CtaButton from "./CtaButton";
 import Score from "./Score";
@@ -62,13 +61,7 @@ export default function Show() {
          <header className="w-100 bg-dark text-white pt-2 pb-1 mb-5">
             <div className="container">
                <div className="row">
-                  <div className="col-12 col-xl-10 offset-xl-1">
-                     <img src={logo} width="40px" alt="Episode Switcher logo" />
-                     <h4 className="d-inline ml-4 text-white">
-                        Episode Switcher
-                     </h4>
-                     <SearchShows />
-                  </div>
+                  <SearchShows />
                </div>
             </div>
          </header>
