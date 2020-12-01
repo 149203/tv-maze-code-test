@@ -1,39 +1,44 @@
 // import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import { useEffect, useState } from "react";
 // import logo from "../icons/top-tv-logo.svg";
+import getShow from "../requests/getShow";
 
 interface propsType {}
 
 export default function SearchShows(props: propsType) {
-   const initialIsOpen = false;
-   const [isOpen, setIsOpen] = useState(initialIsOpen);
-   useEffect(() => {
-      console.log(isOpen);
-      if (isOpen) {
-         const inputGroup = document.querySelector<HTMLElement>(
-            "#show-input-group"
-         );
-         const logoWrapper = document.querySelector<HTMLElement>(
-            "#logo-wrapper"
-         );
-         const searchIcon = document.querySelector<HTMLElement>(
-            "#show-search-icon"
-         );
-         if (inputGroup) {
-            console.log(inputGroup);
-            inputGroup.style.maxWidth = "100%";
-            inputGroup.style.opacity = "1";
-            inputGroup.style.transition = "max-width 0.8s, opacity 0.2s";
-         }
-         if (logoWrapper) {
-            logoWrapper.style.opacity = "0";
-            logoWrapper.style.transition = "opacity 0.3s";
-         }
-         if (searchIcon) {
-            searchIcon.style.marginRight = "0";
-         }
-      }
-   }, [isOpen]);
+   const [showInput, setShowInput] = useState("");
+
+   const getShow = (showInput: string) => {};
+
+   // const initialIsOpen = false;
+   // const [isOpen, setIsOpen] = useState(initialIsOpen);
+   // useEffect(() => {
+   //    console.log(isOpen);
+   //    if (isOpen) {
+   //       const inputGroup = document.querySelector<HTMLElement>(
+   //          "#show-input-group"
+   //       );
+   //       const logoWrapper = document.querySelector<HTMLElement>(
+   //          "#logo-wrapper"
+   //       );
+   //       const searchIcon = document.querySelector<HTMLElement>(
+   //          "#show-search-icon"
+   //       );
+   //       if (inputGroup) {
+   //          console.log(inputGroup);
+   //          inputGroup.style.maxWidth = "100%";
+   //          inputGroup.style.opacity = "1";
+   //          inputGroup.style.transition = "max-width 0.8s, opacity 0.2s";
+   //       }
+   //       if (logoWrapper) {
+   //          logoWrapper.style.opacity = "0";
+   //          logoWrapper.style.transition = "opacity 0.3s";
+   //       }
+   //       if (searchIcon) {
+   //          searchIcon.style.marginRight = "0";
+   //       }
+   //    }
+   // }, [isOpen]);
 
    return (
       <div className="col-12 col-xl-10 offset-xl-1 mb-2">

@@ -42,18 +42,30 @@ export default function Show() {
    const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
    const [hasDataLoaded, setHasDataLoaded] = useState(false);
    useEffect(() => {
-      // 101 = The Good Wife (85)
-      // 507 = Angels in America (77)
-      // 261 = The Soup (45)
-      getShow("http://api.tvmaze.com/shows/101?embed=episodes").then((show) => {
-         if (show) {
-            const seasonsFromEpisodes = getSeasons(show._embedded.episodes);
-            setShow(show);
-            setSeasons(seasonsFromEpisodes);
-            setDisplayedSeasons(seasonsFromEpisodes);
-            setHasDataLoaded(true);
-         }
-      });
+      const tryShow = (randomNum: number) => {
+         getShow(`http://api.tvmaze.com/shows/${randomNum}?embed=episodes`)
+            .then((show) => {
+               if (show) {
+                  const seasonsFromEpisodes = getSeasons(
+                     show._embedded.episodes
+                  );
+                  setShow(show);
+                  setSeasons(seasonsFromEpisodes);
+                  setDisplayedSeasons(seasonsFromEpisodes);
+                  setHasDataLoaded(true);
+               }
+            })
+            .catch(() => {
+               let randomNum = Math.ceil(Math.random() * 50000);
+               console.log(`Retrying for show ${randomNum}`);
+               tryShow(randomNum);
+            });
+      };
+
+      let randomNum = Math.ceil(Math.random() * 50000);
+      // randomNum = 19720; // TEST CASES: 101, 507, 261, 47259, 10670, 25251, 48156, 9360, 19720 (404)
+      console.log(`Searching for show ${randomNum}`);
+      tryShow(randomNum);
    }, []);
 
    return (
@@ -76,11 +88,13 @@ export default function Show() {
                               <ShowTitle show={show} />
                            </div>
                            <div className="col-4 col-sm-3">
-                              <img
-                                 src={show.image.medium}
-                                 alt={`Promotional poster for ${show.name}`}
-                                 className="img-fluid"
-                              />
+                              {show.image && (
+                                 <img
+                                    src={show.image.medium}
+                                    alt={`Promotional poster for ${show.name}`}
+                                    className="img-fluid"
+                                 />
+                              )}
 
                               <div className="float-right mt-3 d-md-none">
                                  <Score
@@ -107,25 +121,34 @@ export default function Show() {
                                  </div>
                               </div>
                               <p className="mt-md-5 d-md-none">
-                                 {truncate(stripTags(show.summary), 400)}
+                                 {show.summary &&
+                                    truncate(stripTags(show.summary), 400)}
                               </p>
                               <p className="mt-md-5 d-none d-md-block">
-                                 {truncate(stripTags(show.summary), 700)}
+                                 {show.summary &&
+                                    truncate(stripTags(show.summary), 700)}
                               </p>
                            </div>
 
-                           <SearchEpisodes
-                              seasons={seasons}
-                              setDisplayedSeasons={setDisplayedSeasons}
-                           />
+                           {seasons.length > 0 && (
+                              <>
+                                 <SearchEpisodes
+                                    seasons={seasons}
+                                    setDisplayedSeasons={setDisplayedSeasons}
+                                 />
 
-                           <EpisodeSwitcher />
+                                 <EpisodeSwitcher />
 
-                           {displayedSeasons.map((season) => {
-                              return (
-                                 <Season season={season} key={season.number} />
-                              );
-                           })}
+                                 {displayedSeasons.map((season) => {
+                                    return (
+                                       <Season
+                                          season={season}
+                                          key={season.number}
+                                       />
+                                    );
+                                 })}
+                              </>
+                           )}
                         </article>
                      </div>
                   </div>

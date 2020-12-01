@@ -7,9 +7,11 @@ export default function Score(props: propsType) {
    const getScoreClass = (rating: number): string => {
       let scoreClass = "bg-warning";
       if (rating > 80) scoreClass = "bg-success";
-      if (rating < 50) scoreClass = "bg-danger";
+      if (rating < 60) scoreClass = "bg-danger";
       return scoreClass;
    };
+
+   if (props.rating === 0) return <></>;
 
    if (props.size === "md") {
       return (

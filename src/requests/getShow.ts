@@ -11,5 +11,5 @@ export default function getShow(url: string) {
          };
          return show;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => error);
 }
