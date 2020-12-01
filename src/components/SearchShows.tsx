@@ -1,7 +1,6 @@
-import { ReactComponent as SearchIcon } from "../icons/search.svg";
+// import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import { useEffect, useState } from "react";
-import produce from "immer";
-import logo from "../icons/top-tv-logo.svg";
+// import logo from "../icons/top-tv-logo.svg";
 
 interface propsType {}
 
@@ -39,17 +38,17 @@ export default function SearchShows(props: propsType) {
    return (
       <div className="col-12 col-xl-10 offset-xl-1 mb-2">
          <div className="position-absolute" id="logo-wrapper">
-            <img src={logo} width="40px" alt="Episode Switcher logo" />
-            <h4 className="d-inline ml-4 text-white">Episode Switcher</h4>
+            {/* <img src={logo} width="40px" className="mr-4" alt="Episode Switcher logo" /> */}
+            <h4 className="text-white mt-2">Episode Switcher</h4>
          </div>
          <div className="d-inline-flex mt-1 float-right" id="search-wrapper">
-            <SearchIcon
+            {/* <SearchIcon
                fill="#dee2e6"
                width="28px"
                className="mt-1"
                id="show-search-icon"
                onClick={() => setIsOpen(!isOpen)}
-            />
+            /> */}
 
             <div className="input-group ml-3" id="show-input-group">
                <input

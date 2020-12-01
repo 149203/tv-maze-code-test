@@ -13,6 +13,14 @@ export default function SearchEpisodes(props: propsType) {
 
    useEffect(() => {
       const newSeasons = produce(seasons, (draftSeasons) => {
+         const seasonNumbers = draftSeasons.map((season) => {
+            return season.number;
+         });
+         if (seasonNumbers.includes(Number(searchInput))) {
+            return draftSeasons.filter((season) => {
+               return season.number === Number(searchInput);
+            });
+         }
          draftSeasons.forEach((season) => {
             let episodes: episodeType[] = [];
             season.episodes.forEach((episode) => {
