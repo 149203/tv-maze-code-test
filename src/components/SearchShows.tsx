@@ -28,8 +28,7 @@ export default function SearchShows(props: propsType) {
          }
          if (logoWrapper) {
             logoWrapper.style.opacity = "0";
-            logoWrapper.style.maxWidth = "0%";
-            logoWrapper.style.transition = "max-width 0.2s, opacity 0.5s";
+            logoWrapper.style.transition = "opacity 0.3s";
          }
          if (searchIcon) {
             searchIcon.style.marginRight = "0";
