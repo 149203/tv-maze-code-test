@@ -10,7 +10,7 @@ interface propsType {
 export default function ShowTitle(props: propsType) {
    return (
       <section>
-         <h1>{props.show.name}</h1>
+         <h1 className="mt-n2">{props.show.name}</h1>
          <p className="text-muted mb-3">
             {props.show.genres.length > 0 && (
                <span>{toListText(props.show.genres)}</span>

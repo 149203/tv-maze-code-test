@@ -33,7 +33,7 @@ export default function Screenshot(props: propsType) {
                   bottom: 0,
                   right: 0,
                   textAlign: "center",
-                  top: "32%",
+                  top: "34%",
                }}
             >
                NA
