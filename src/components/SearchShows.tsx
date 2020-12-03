@@ -9,6 +9,9 @@ interface propsType {
    setSeasons: any;
    setDisplayedSeasons: any;
    setHasDataLoaded: any;
+   setSeasonSelect: any;
+   setEpisodeSelect: any;
+   setEpisodeSelectEpisodes: any;
 }
 
 export default function SearchShows(props: propsType) {
@@ -27,6 +30,11 @@ export default function SearchShows(props: propsType) {
                props.setSeasons(seasonsFromEpisodes);
                props.setDisplayedSeasons(seasonsFromEpisodes);
                props.setHasDataLoaded(true);
+               props.setSeasonSelect(seasonsFromEpisodes[0].number);
+               props.setEpisodeSelect(
+                  seasonsFromEpisodes[0].episodes[0].number
+               );
+               props.setEpisodeSelectEpisodes(seasonsFromEpisodes[0].episodes);
                setIs404(false);
                setShowInput("");
             }

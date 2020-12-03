@@ -8,7 +8,7 @@ import SearchEpisodes from "./SearchEpisodes";
 import EpisodeSwitcher from "./EpisodeSwitcher";
 import ShowImage from "./ShowImage";
 import { useEffect, useState } from "react";
-import { showType, seasonType } from "../models/clientInterfaces";
+import { showType, seasonType, episodeType } from "../models/clientInterfaces";
 import getShow from "../requests/getShow";
 import { truncate, stripTags } from "../utils/helpers";
 import getSeasons from "../utils/getSeasons";
@@ -33,7 +33,18 @@ export default function Show() {
    const initialSeasons: readonly seasonType[] = [
       {
          number: 0,
-         episodes: [],
+         episodes: [
+            {
+               season: 0,
+               airdate: "",
+               id: "",
+               summary: "",
+               image: { medium: "" },
+               name: "",
+               number: 0,
+               url: "",
+            },
+         ],
          airedAt: "",
       },
    ];
@@ -42,6 +53,13 @@ export default function Show() {
    const [seasons, setSeasons] = useState(initialSeasons);
    const [displayedSeasons, setDisplayedSeasons] = useState(initialSeasons);
    const [hasDataLoaded, setHasDataLoaded] = useState(false);
+   const [seasonSelect, setSeasonSelect] = useState(initialSeasons[0].number);
+   const [episodeSelect, setEpisodeSelect] = useState(
+      initialSeasons[0].episodes[0].number
+   );
+   const [episodeSelectEpisodes, setEpisodeSelectEpisodes] = useState(
+      initialSeasons[0].episodes
+   );
    useEffect(() => {
       const tryShow = (randomNum: number) => {
          getShow(`http://api.tvmaze.com/shows/${randomNum}?embed=episodes`)
@@ -54,6 +72,7 @@ export default function Show() {
                   setSeasons(seasonsFromEpisodes);
                   setDisplayedSeasons(seasonsFromEpisodes);
                   setHasDataLoaded(true);
+                  setEpisodeSelectEpisodes(seasonsFromEpisodes[0].episodes);
                }
             })
             .catch(() => {
@@ -64,7 +83,7 @@ export default function Show() {
       };
 
       let randomNum = Math.ceil(Math.random() * 50000);
-      // randomNum = 32636; // TEST CASES: 101, 507, 261, 47259, 10670, 25251, 48156, 9360, 19720 (404), 32636, 39899
+      // randomNum = 32636; // TEST CASES: 101, 507, 261, 47259, 10670, 25251, 48156, 9360, 19720 (404), 32636, 39899, 37628 (episodes lengths)
       console.log(`Searching for show ${randomNum}`);
       tryShow(randomNum);
    }, []);
@@ -79,6 +98,9 @@ export default function Show() {
                      setSeasons={setSeasons}
                      setDisplayedSeasons={setDisplayedSeasons}
                      setHasDataLoaded={setHasDataLoaded}
+                     setSeasonSelect={setSeasonSelect}
+                     setEpisodeSelect={setEpisodeSelect}
+                     setEpisodeSelectEpisodes={setEpisodeSelectEpisodes}
                   />
                </div>
             </div>
@@ -144,7 +166,19 @@ export default function Show() {
                                     setDisplayedSeasons={setDisplayedSeasons}
                                  />
 
-                                 <EpisodeSwitcher />
+                                 <EpisodeSwitcher
+                                    seasons={seasons}
+                                    episodeSelectEpisodes={
+                                       episodeSelectEpisodes
+                                    }
+                                    seasonSelect={seasonSelect}
+                                    setSeasonSelect={setSeasonSelect}
+                                    episodeSelect={episodeSelect}
+                                    setEpisodeSelect={setEpisodeSelect}
+                                    setEpisodeSelectEpisodes={
+                                       setEpisodeSelectEpisodes
+                                    }
+                                 />
 
                                  {displayedSeasons.map((season) => {
                                     return (
