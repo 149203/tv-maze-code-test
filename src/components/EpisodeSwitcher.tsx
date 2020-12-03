@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { seasonType, episodeType } from "../models/clientInterfaces";
 import produce from "immer";
-import getSeasons from "../utils/getSeasons";
 import getShow from "../requests/getShow";
 
 interface propsType {
-   seasons: readonly seasonType[];
+   displayedSeasons: readonly seasonType[];
    seasonSelect: number;
    setSeasonSelect: any; // TODO: replace
    episodeSelect: number;
    setEpisodeSelect: any; // TODO: replace
    episodeSelectEpisodes: any; // TODO: replace with list of episodes
    setEpisodeSelectEpisodes: any;
-   setSeasons: any;
+   setDisplayedSeasons: any;
 }
 
 export default function EpisodeSwitcher(props: propsType) {
    const [input, setInput] = useState("");
+   const [switcherError, setSwitcherError] = useState("");
 
    const getEpisodes = (seasonNum: number) => {
-      return props.seasons.filter((season) => {
+      return props.displayedSeasons.filter((season) => {
          return season.number === seasonNum;
       })[0].episodes;
    };
@@ -35,9 +35,6 @@ export default function EpisodeSwitcher(props: propsType) {
       )
          .then((show) => {
             if (show) {
-               // console.log(show);
-               // flatten all episodes
-               // find the episode where season and number match
                const episode = show._embedded.episodes.find(
                   (episode: episodeType) => {
                      return (
@@ -47,29 +44,43 @@ export default function EpisodeSwitcher(props: propsType) {
                   }
                );
 
-               const newSeasons = produce(props.seasons, (draftSeasons) => {
-                  const seasonIndex = draftSeasons.findIndex((season) => {
-                     return season.number === props.seasonSelect;
-                  });
-                  const episodeIndex = draftSeasons[
-                     seasonIndex
-                  ].episodes.findIndex((episode) => {
-                     return episode.number === props.episodeSelect;
-                  });
-                  draftSeasons[seasonIndex].episodes[episodeIndex] = episode;
-                  return draftSeasons;
-               });
+               console.log({ episode });
 
-               props.setSeasons(newSeasons);
+               if (episode) {
+                  const newSeasons = produce(
+                     props.displayedSeasons,
+                     (draftSeasons) => {
+                        const seasonIndex = draftSeasons.findIndex((season) => {
+                           return season.number === props.seasonSelect;
+                        });
+                        const episodeIndex = draftSeasons[
+                           seasonIndex
+                        ].episodes.findIndex((episode) => {
+                           return episode.number === props.episodeSelect;
+                        });
+                        draftSeasons[seasonIndex].episodes[
+                           episodeIndex
+                        ] = episode;
+                        return draftSeasons;
+                     }
+                  );
+                  console.log({ newSeasons });
+                  props.setDisplayedSeasons(newSeasons);
+                  setSwitcherError("");
+               } else {
+                  setSwitcherError(
+                     "There is no matching episode for the season, episode, and show provided."
+                  );
+               }
             }
          })
          .catch(() => {
-            console.log("NO SHOW!");
+            setSwitcherError(`There is no show matching "${input}"`);
          });
    };
 
    return (
-      <div className="col-12 mb-5">
+      <div className="col-12 mt-5 mb-4">
          <div className="row">
             <div className="col-lg-1 col-sm-2">
                <label htmlFor="select-season" className="mt-2">
@@ -88,7 +99,7 @@ export default function EpisodeSwitcher(props: propsType) {
                      props.setSeasonSelect(Number(e.target.value));
                   }}
                >
-                  {props.seasons.map((season) => {
+                  {props.displayedSeasons.map((season) => {
                      return (
                         <option value={season.number} key={season.number}>
                            Season {season.number}
@@ -144,6 +155,11 @@ export default function EpisodeSwitcher(props: propsType) {
                </button>
             </div>
          </div>
+         {switcherError && (
+            <div className="alert alert-danger mt-3" role="alert">
+               {switcherError}
+            </div>
+         )}
       </div>
    );
 }

@@ -32,10 +32,10 @@ export default function Show() {
 
    const initialSeasons: readonly seasonType[] = [
       {
-         number: 0,
+         number: 1,
          episodes: [
             {
-               season: 0,
+               season: 1,
                airdate: "",
                id: "",
                summary: "",
@@ -73,6 +73,8 @@ export default function Show() {
                   setDisplayedSeasons(seasonsFromEpisodes);
                   setHasDataLoaded(true);
                   setEpisodeSelectEpisodes(seasonsFromEpisodes[0].episodes);
+                  setSeasonSelect(seasonsFromEpisodes[0].number);
+                  setEpisodeSelect(seasonsFromEpisodes[0].episodes[0].number);
                }
             })
             .catch(() => {
@@ -83,7 +85,7 @@ export default function Show() {
       };
 
       let randomNum = Math.ceil(Math.random() * 50000);
-      // randomNum = 32636; // TEST CASES: 101, 507, 261, 47259, 10670, 25251, 48156, 9360, 19720 (404), 32636, 39899, 37628 (episodes lengths)
+      // randomNum = 22038; // TEST CASES: 101, 507, 261, 47259, 10670, 25251, 48156, 9360, 19720 (404), 32636, 39899, 37628 (episodes lengths), 22038 (Season 0)
       console.log(`Searching for show ${randomNum}`);
       tryShow(randomNum);
    }, []);
@@ -161,13 +163,13 @@ export default function Show() {
 
                            {seasons.length > 0 && (
                               <>
-                                 <SearchEpisodes
+                                 {/* <SearchEpisodes
                                     seasons={seasons}
                                     setDisplayedSeasons={setDisplayedSeasons}
-                                 />
+                                 /> */}
 
                                  <EpisodeSwitcher
-                                    seasons={seasons}
+                                    displayedSeasons={displayedSeasons}
                                     episodeSelectEpisodes={
                                        episodeSelectEpisodes
                                     }
@@ -178,7 +180,7 @@ export default function Show() {
                                     setEpisodeSelectEpisodes={
                                        setEpisodeSelectEpisodes
                                     }
-                                    setSeasons={setSeasons}
+                                    setDisplayedSeasons={setDisplayedSeasons}
                                  />
 
                                  {displayedSeasons.map((season) => {
