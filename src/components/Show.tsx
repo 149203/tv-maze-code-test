@@ -74,7 +74,12 @@ export default function Show() {
          <header className="w-100 bg-dark text-white pt-2 pb-1 mb-5">
             <div className="container">
                <div className="row">
-                  <SearchShows />
+                  <SearchShows
+                     setShow={setShow}
+                     setSeasons={setSeasons}
+                     setDisplayedSeasons={setDisplayedSeasons}
+                     setHasDataLoaded={setHasDataLoaded}
+                  />
                </div>
             </div>
          </header>

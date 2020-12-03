@@ -2,13 +2,45 @@
 import { useEffect, useState } from "react";
 // import logo from "../icons/top-tv-logo.svg";
 import getShow from "../requests/getShow";
+import getSeasons from "../utils/getSeasons";
 
-interface propsType {}
+interface propsType {
+   setShow: any; // TODO: REPLACE!
+   setSeasons: any;
+   setDisplayedSeasons: any;
+   setHasDataLoaded: any;
+}
 
 export default function SearchShows(props: propsType) {
    const [showInput, setShowInput] = useState("");
+   const [is404, setIs404] = useState(false);
 
-   const getShow = (showInput: string) => {};
+   const searchForShow = (showInput: string) => {
+      getShow(
+         `http://api.tvmaze.com/singlesearch/shows?q=${showInput}&embed=episodes`
+      )
+         .then((show) => {
+            if (show) {
+               console.log(show);
+               const seasonsFromEpisodes = getSeasons(show._embedded.episodes);
+               props.setShow(show);
+               props.setSeasons(seasonsFromEpisodes);
+               props.setDisplayedSeasons(seasonsFromEpisodes);
+               props.setHasDataLoaded(true);
+               setIs404(false);
+            }
+         })
+         .catch(() => {
+            console.log("NO SHOW!");
+            setIs404(true);
+         });
+   };
+
+   const handleEnterPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter") {
+         searchForShow(showInput);
+      }
+   };
 
    // const initialIsOpen = false;
    // const [isOpen, setIsOpen] = useState(initialIsOpen);
@@ -39,7 +71,11 @@ export default function SearchShows(props: propsType) {
    //       }
    //    }
    // }, [isOpen]);
-
+   const getInputClassNames = () => {
+      if (is404) {
+         return "form-control form-control rounded-left"; // can add is-invalid later
+      } else return "form-control form-control rounded-left";
+   };
    return (
       <div className="col-12 col-xl-10 offset-xl-1 mb-2">
          <div className="position-absolute" id="logo-wrapper">
@@ -58,12 +94,25 @@ export default function SearchShows(props: propsType) {
             <div className="input-group ml-3" id="show-input-group">
                <input
                   type="text"
-                  className="form-control form-control rounded-left"
+                  className={getInputClassNames()}
                   placeholder="Enter a TV show"
                   autoComplete="off"
+                  onKeyPress={(e) => {
+                     handleEnterPress(e);
+                  }}
+                  onChange={(e) => {
+                     setShowInput(e.target.value);
+                  }}
                />
                <div className="input-group-append">
-                  <button className="btn btn-secondary">Search</button>
+                  <button
+                     className="btn btn-secondary"
+                     onClick={() => {
+                        searchForShow(showInput);
+                     }}
+                  >
+                     Search
+                  </button>
                </div>
             </div>
          </div>

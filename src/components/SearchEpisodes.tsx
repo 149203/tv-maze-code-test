@@ -4,7 +4,7 @@ import produce from "immer";
 
 interface propsType {
    seasons: readonly seasonType[];
-   setDisplayedSeasons: any;
+   setDisplayedSeasons: any; // TODO: REPLACE!
 }
 
 export default function SearchEpisodes(props: propsType) {
