@@ -12,6 +12,7 @@ interface propsType {
    setEpisodeSelect: any; // TODO: replace
    episodeSelectEpisodes: any; // TODO: replace with list of episodes
    setEpisodeSelectEpisodes: any;
+   setSeasons: any;
 }
 
 export default function EpisodeSwitcher(props: propsType) {
@@ -45,9 +46,21 @@ export default function EpisodeSwitcher(props: propsType) {
                      );
                   }
                );
-               console.log(episode);
 
-               // TODO: REPLACE THE CURRENT EPISODE IN THIS SPOT WITH THIS EPISODE
+               const newSeasons = produce(props.seasons, (draftSeasons) => {
+                  const seasonIndex = draftSeasons.findIndex((season) => {
+                     return season.number === props.seasonSelect;
+                  });
+                  const episodeIndex = draftSeasons[
+                     seasonIndex
+                  ].episodes.findIndex((episode) => {
+                     return episode.number === props.episodeSelect;
+                  });
+                  draftSeasons[seasonIndex].episodes[episodeIndex] = episode;
+                  return draftSeasons;
+               });
+
+               props.setSeasons(newSeasons);
             }
          })
          .catch(() => {

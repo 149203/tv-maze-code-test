@@ -178,6 +178,7 @@ export default function Show() {
                                     setEpisodeSelectEpisodes={
                                        setEpisodeSelectEpisodes
                                     }
+                                    setSeasons={setSeasons}
                                  />
 
                                  {displayedSeasons.map((season) => {
