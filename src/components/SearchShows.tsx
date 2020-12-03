@@ -28,6 +28,7 @@ export default function SearchShows(props: propsType) {
                props.setDisplayedSeasons(seasonsFromEpisodes);
                props.setHasDataLoaded(true);
                setIs404(false);
+               setShowInput("");
             }
          })
          .catch(() => {
@@ -97,6 +98,7 @@ export default function SearchShows(props: propsType) {
                   className={getInputClassNames()}
                   placeholder="Enter a TV show"
                   autoComplete="off"
+                  value={showInput}
                   onKeyPress={(e) => {
                      handleEnterPress(e);
                   }}
